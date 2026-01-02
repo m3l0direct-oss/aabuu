@@ -1,0 +1,41 @@
+/* 
+ * @auther Anwar Al-Qataa'n
+ * @Date 07/10/2010
+ */
+function validate_logon()
+{
+    String.prototype.trim = function() {
+        return this.replace(/^\s+|\s+$/g,"");
+    }
+    var id   = document.signin.UsrId.value.trim()    ;
+    var pass = document.signin.password.value.trim() ;
+    if ( ( id.length != 10 ) || ( id.length == 0 ) )
+    {
+        alert("\u064aرجى التاكد \u0645ن الرقم");
+        document.signin.UsrId.focus();
+        return;
+    }else if ( ( pass.length != 7 ) || ( pass.length == 0 ) )
+    {
+        alert("\u064aرجى التاكد \u0645ن ال\u0631قم السري");
+        document.signin.password.focus();
+        return;
+    }else
+    {
+        document.signin.submit();
+    }
+}
+function CheckLength(e){
+    if(e.value.length==10)
+        document.getElementById('password').focus();
+}
+
+function getLogList(){
+    var ajaxObjects = new Array();
+    var ajaxIndex = ajaxObjects.length;
+    ajaxObjects[ajaxIndex] = new sack();
+    ajaxObjects[ajaxIndex].requestFile = '/nreg/OtherLoginRec.jsp';
+    ajaxObjects[ajaxIndex].onCompletion = function(){
+        document.getElementById('OtherLog').innerHTML = ajaxObjects[ajaxIndex].response ;
+    };
+    ajaxObjects[ajaxIndex].runAJAX();		// Execute AJAX function
+}
