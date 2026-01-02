@@ -1,0 +1,78 @@
+
+function numberonly(myfield,e,dec)
+{
+    var key ;
+    var keychar ;
+    if(window.event)
+        key = window.event.keyCode ;
+    else if(e)
+        key = e.which ;
+    else
+        return true ;
+    keychar = String.fromCharCode(key) ;
+    //alert(key);
+    //control key
+    if((key == null) || (key == 0) || (key == 8) || (key == 9) || (key == 27))
+        return true ;
+
+
+    else if(key == 13){//enter key
+
+        document.signin.btnsubmit.click();
+    }
+    //number
+    else if((("0123456789").indexOf(keychar) > -1))
+
+        return true ;
+
+    else
+
+        return false ;
+}
+// peaff JavaScript
+
+function ajaxFunction(prog, param, tag1)
+{
+    var xmlHttp;
+    var ajaxsearch = document.getElementById(tag1);
+    try
+    {  // Firefox, Opera 8.0+, Safari
+        xmlHttp = new XMLHttpRequest();
+    }
+    catch (e)
+    {  // Internet Explorer
+        try
+        {
+            xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+        }
+        catch (e)
+        {
+            try
+            {
+                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            catch (e)
+            {
+                alert("Your browser does not support AJAX!");
+                return false;
+            }
+        }
+    }
+    xmlHttp.onreadystatechange = function (param)
+    {
+        if (xmlHttp.readyState == 4)
+        {
+            var newdiv = document.createElement("div");
+            newdiv.innerHTML = xmlHttp.responseText;
+            var container = document.getElementById(tag1);
+            container.innerHTML = "";
+            container.appendChild(newdiv);
+            fb.anchors.lenght = 0;
+            fb.tagAnchors(document);
+        }
+    }
+    ajaxsearch.innerHTML = "<span style='font-family:Tahoma;font-size:10pt;color:#006699'>يرجى الانتظار<br><img src='/images/redrct.gif' /></span>";
+    xmlHttp.open("POST", prog, true);
+    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlHttp.send(param);
+}

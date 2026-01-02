@@ -1,0 +1,89 @@
+String.prototype.trim = function() {
+    return this.replace(/^\s+|\s+$/g,"");
+}
+
+function check_pass(e,ee,k){
+    var key ;
+    if( e.value.trim().length == 9 ){
+        if(e.value in {
+            '1111111':'',
+            '2222222':'',
+            '3333333':'',
+            '4444444':'',
+            '5555555':'',
+            '6666666':'',
+            '7777777':'',
+            '8888888':'',
+            '9999999':'',
+            '1234567':'',
+            '7543210':'',
+            '9876543':'',
+            '2345678':'',
+            '3456789':'',
+            '1000000':'',
+            '0000001':'',
+            '1122334':''
+        }) {
+            alert('كلمة السر المقترحة غير مطابقة لشروط كلمات السر');
+            e.value = '' ;
+            e.focus();
+            return false ;
+        }else{
+            if ( ee.value.trim().length != 0 ){
+                if (e.value.trim() != ee.value.trim()){
+                    alert('كلمة السر الاولى غير مساوية للثانية ');
+                    e.focus();
+                    return false ;
+                }else{
+                    return true ;
+                }
+            }
+            ee.focus();
+        }
+    }else{
+        if(window.event)
+            key = window.event.keyCode ;
+        else if(k)
+            key = k.which ;
+        else
+            return true ;
+        var character = String.fromCharCode(key);
+        if((key == null) || (key == 8) ||
+            (key == 9) || (key == 27)||(key == 13))
+            return true ;
+        if(!(("0123456789").indexOf(character) > -1)){
+            if( e.value.trim().length < 9 ){
+                alert('ادخل كلمة السر من تسع خانات');
+                e.focus();
+                return false ;
+            }else{
+                return true ;
+            }
+        }else{
+            if( e.value.trim().length == 1 ){
+                if(e.value == 0 ){
+                    alert('لايجوز ان يبدأ الرقم السري باصفار  '+e.value);
+                    e.value = '' ;
+                    e.focus();
+                    return false ;
+                }else{
+                    return true ;
+                }
+
+            }
+
+        }
+    }
+
+}
+
+function checkIfNull(){
+
+    var tmp=document.upd_ename.e_name.value;
+    if(tmp.trim().length == 0 ){
+        alert ("الرجاء ادخال الاسم ");
+        return false;
+    }else{
+        document.upd_ename.submit();
+    }
+}
